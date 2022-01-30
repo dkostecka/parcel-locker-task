@@ -11,7 +11,7 @@ function createDeliveryForm() {
     let formDelivery = this.containerDiv.appendChild(document.createElement('form'));
     formDelivery.name = 'deliveryForm';
     formDelivery.id = 'deliveryForm';
-    formDelivery.className = 'delivery-formDelivery';
+    formDelivery.className = 'delivery-form';
 
     createPhoneNumber(formDelivery);
     createCodeNumber(formDelivery);
@@ -70,6 +70,7 @@ function createSuccesDeliveryButton(formDelivery) {
     succesDeliveryButton.innerHTML = "Odbierz paczkę";
     succesDeliveryButton.id = 'succesDeliveryButton'
     succesDeliveryButton.className = 'container__button';
+    succesDeliveryButton.type= 'button';
     succesDeliveryButton.disabled = true;
     succesDeliveryButton.onclick = function () {
         succesDelivery()
@@ -77,10 +78,12 @@ function createSuccesDeliveryButton(formDelivery) {
 }
 
 function succesDelivery() {
-    document.getElementById("deliveryForm").remove();
+    let deliverySummary = this.containerDiv.appendChild(document.createElement('div'));
+    deliverySummary.className = 'modal';
+    deliverySummary.id = 'summary';
 
-    let summaryDiv = this.containerDiv.appendChild(document.createElement('div'));
-    summaryDiv.id = "summary";
+    let summaryDiv = deliverySummary.appendChild(document.createElement('div'));
+    summaryDiv.className = 'modal__div';
 
     let h3 = summaryDiv.appendChild(document.createElement('h3'));
     h3.innerHTML = "Paczka odebrana!"
@@ -113,12 +116,14 @@ function createNextDeliveryButton(summaryDiv) {
 }
 
 function nextDelivery() {
+    document.getElementById("deliveryForm").remove();
     document.getElementById("summary").remove();
     setFormValidity(true);
     createDeliveryForm();
 };
 
 function endDelivery() {
+    document.getElementById("deliveryForm").remove();
     document.getElementById("summary").remove();
     setFormValidity(true);
 

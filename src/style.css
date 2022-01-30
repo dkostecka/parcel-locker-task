@@ -1,35 +1,50 @@
 :root {
-    --primary-red: #ff0000;
-    --primary-gray: #d3d3d3;
-    --primary-black: #0000;
-    --secondary-black: #00000066;
+  --primary-red: #ff0000;
+  --primary-gray: #d3d3d3;
+  --primary-black: #0000;
+  --secondary-black: #00000066;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: var(--primary-gray);
-    margin:auto;
-    width: 50%;
-    padding: 5%;
-    font-family: 'Lato', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--primary-gray);
+  margin: auto;
+  width: 50%;
+  padding: 5%;
+  font-family: "Lato", sans-serif;
 }
 
 .container__h1 {
-    color: var(--primary-red);
-    font-weight: 900;
-    text-transform: uppercase;
-}  
+  color: var(--primary-red);
+  font-weight: 900;
+  text-transform: uppercase;
+}
 
-.container__button{
-    height: 75px;
-    width: 150px;
-    background-color: var(--primary-red);
-    border: none;
-    padding: 25px;
-    font-weight: bold ;
-    margin-top: 10px;
+.container__button {
+  height: 75px;
+  width: 150px;
+  background-color: var(--primary-red);
+  border: none;
+  padding: 25px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.delivery-form__input {
+  border: none;
+  padding: 10px;
+}
+
+.delivery-form__div {
+  display: inline-block;
+  overflow: auto;
+}
+
+.delivery-form__label {
+  display: block;
+  font-size: small;
 }

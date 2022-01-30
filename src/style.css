@@ -49,3 +49,9 @@
   display: block;
   font-size: small;
 }
+
+.delivery-form__span--error {
+  font-size: x-small;
+  color: var(--primary-red);
+  visibility: hidden;
+}

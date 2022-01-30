@@ -2,9 +2,24 @@ containerDiv = document.getElementById('container');
 isCodeNumberInvalid = true;
 isPhoneNumberInvalid = true;
 
+function loader(ms, loaderButton) {
+    loaderButton.classList.add('spin');
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function startDelivery() {
-    document.getElementById("startDeliveryButton").remove();
-    createDeliveryForm();
+    let loaderButton = document.getElementById('loader');
+    loaderButton.style.display = "block";
+    document.getElementById("startDeliverySpan").style.display = "none";
+    document.getElementById("startDeliveryButton").disabled = true;
+    console.log(loaderButton.style.display);
+    loader(1000, loaderButton).then(() => {
+        loaderButton.classList.remove('spin');
+        loaderButton.style.display = "none";
+        console.log(loaderButton.style.display);
+        document.getElementById("startDeliveryButton").remove();
+        createDeliveryForm();
+    });
 }
 
 function createDeliveryForm() {
@@ -70,7 +85,7 @@ function createSuccesDeliveryButton(formDelivery) {
     succesDeliveryButton.innerHTML = "Odbierz paczkę";
     succesDeliveryButton.id = 'succesDeliveryButton'
     succesDeliveryButton.className = 'container__button';
-    succesDeliveryButton.type= 'button';
+    succesDeliveryButton.type = 'button';
     succesDeliveryButton.disabled = true;
     succesDeliveryButton.onclick = function () {
         succesDelivery()
@@ -130,7 +145,9 @@ function endDelivery() {
     let startDeliveryButton = this.containerDiv.appendChild(document.createElement('button'));
     startDeliveryButton.innerHTML = "Odbierz paczkę";
     startDeliveryButton.id = 'startDeliveryButton'
+    startDeliveryButton.type = 'button';
     startDeliveryButton.className = 'container__button';
+    startDeliveryButton.innerHTML = '<span id="startDeliverySpan">Odbierz paczkę</span><div class="loader" id="loader"></div>';
     startDeliveryButton.onclick = function () {
         startDelivery()
     };

@@ -32,6 +32,7 @@ function createPhoneNumber(formDelivery) {
     let phoneNumberInput = phoneNumberDiv.appendChild(document.createElement('input'));
     phoneNumberInput.type = 'text';
     phoneNumberInput.name = 'phoneNumber';
+    phoneNumberInput.className = 'delivery-form__input'
 
     let phoneNumberError = phoneNumberDiv.appendChild(document.createElement('span'));
     phoneNumberError.id = 'phoneNumberError';
@@ -54,6 +55,7 @@ function createCodeNumber(formDelivery) {
     let codeNumberInput = codeNumberDiv.appendChild(document.createElement('input'));
     codeNumberInput.type = 'text';
     codeNumberInput.name = 'codeNumber';
+    codeNumberInput.className = 'delivery-form__input'
 
     let codeNumberError = codeNumberDiv.appendChild(document.createElement('span'));
     codeNumberError.id = 'codeNumberError';
@@ -119,7 +121,7 @@ function nextDelivery() {
 function endDelivery() {
     document.getElementById("summary").remove();
     setFormValidity(true);
-    
+
     let startDeliveryButton = this.containerDiv.appendChild(document.createElement('button'));
     startDeliveryButton.innerHTML = "Odbierz paczkę";
     startDeliveryButton.id = 'startDeliveryButton'

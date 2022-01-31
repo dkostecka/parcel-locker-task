@@ -31,8 +31,8 @@ function createDeliveryForm() {
     createPhoneNumber(formDelivery);
     createCodeNumber(formDelivery);
     formDelivery.appendChild(document.createElement("br"));
-    createSuccesDeliveryButton(formDelivery);
-
+    let timeStart = new Date();
+    createSuccesDeliveryButton(formDelivery, timeStart);
 }
 
 function createPhoneNumber(formDelivery) {
@@ -80,7 +80,7 @@ function createCodeNumber(formDelivery) {
     codeNumberInput.onchange = function () { validateCodeNumber() };
 }
 
-function createSuccesDeliveryButton(formDelivery) {
+function createSuccesDeliveryButton(formDelivery, timeStart) {
     let succesDeliveryButton = formDelivery.appendChild(document.createElement('button'));
     succesDeliveryButton.innerHTML = "Odbierz paczkę";
     succesDeliveryButton.id = 'succesDeliveryButton'
@@ -88,11 +88,13 @@ function createSuccesDeliveryButton(formDelivery) {
     succesDeliveryButton.type = 'button';
     succesDeliveryButton.disabled = true;
     succesDeliveryButton.onclick = function () {
-        succesDelivery()
+        var timeEnd = new Date();
+        var deliveryTime = Math.round(timeEnd - timeStart) / 1000;
+        succesDelivery(deliveryTime.toFixed(1))
     };
 }
 
-function succesDelivery() {
+function succesDelivery(deliveryTime) {
     let deliverySummary = this.containerDiv.appendChild(document.createElement('div'));
     deliverySummary.className = 'modal';
     deliverySummary.id = 'summary';
@@ -104,7 +106,7 @@ function succesDelivery() {
     h3.innerHTML = "Paczka odebrana!"
 
     let p = summaryDiv.appendChild(document.createElement('p'));
-    p.innerHTML = "Zrobiłeś to w czasie 10 sekund! Czy możemy zrobić dla ciebie coś jeszcze?";
+    p.innerHTML = "Zrobiłeś to w czasie " + deliveryTime + " sekund! Czy możemy zrobić dla ciebie coś jeszcze?";
 
     createEndDeliveryButton(summaryDiv);
     createNextDeliveryButton(summaryDiv);

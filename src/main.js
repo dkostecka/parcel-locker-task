@@ -8,21 +8,24 @@ function loader(ms, loaderButton) {
 }
 
 function startDelivery() {
+    let script= document.createElement('script');
+    script.src= 'test-start.js';
+    containerDiv.appendChild(script);
+
     let loaderButton = document.getElementById('loader');
     loaderButton.style.display = "block";
     document.getElementById("startDeliverySpan").style.display = "none";
     document.getElementById("startDeliveryButton").disabled = true;
-    console.log(loaderButton.style.display);
     loader(1000, loaderButton).then(() => {
         loaderButton.classList.remove('spin');
         loaderButton.style.display = "none";
-        console.log(loaderButton.style.display);
         document.getElementById("startDeliveryButton").remove();
-        createDeliveryForm();
+        createDeliveryForm();       
     });
 }
 
 function createDeliveryForm() {
+
     let formDelivery = this.containerDiv.appendChild(document.createElement('form'));
     formDelivery.name = 'deliveryForm';
     formDelivery.id = 'deliveryForm';
@@ -30,7 +33,9 @@ function createDeliveryForm() {
 
     createPhoneNumber(formDelivery);
     createCodeNumber(formDelivery);
+
     formDelivery.appendChild(document.createElement("br"));
+    
     let timeStart = new Date();
     createSuccesDeliveryButton(formDelivery, timeStart);
 }
@@ -47,6 +52,7 @@ function createPhoneNumber(formDelivery) {
     let phoneNumberInput = phoneNumberDiv.appendChild(document.createElement('input'));
     phoneNumberInput.type = 'text';
     phoneNumberInput.name = 'phoneNumber';
+    phoneNumberInput.id='phoneNumber'
     phoneNumberInput.className = 'delivery-form__input'
 
     let phoneNumberError = phoneNumberDiv.appendChild(document.createElement('span'));
@@ -88,8 +94,8 @@ function createSuccesDeliveryButton(formDelivery, timeStart) {
     succesDeliveryButton.type = 'button';
     succesDeliveryButton.disabled = true;
     succesDeliveryButton.onclick = function () {
-        var timeEnd = new Date();
-        var deliveryTime = Math.round(timeEnd - timeStart) / 1000;
+        let timeEnd = new Date();
+        let deliveryTime = Math.round(timeEnd - timeStart) / 1000;
         succesDelivery(deliveryTime.toFixed(1))
     };
 }
@@ -110,6 +116,10 @@ function succesDelivery(deliveryTime) {
 
     createEndDeliveryButton(summaryDiv);
     createNextDeliveryButton(summaryDiv);
+
+    let script= document.createElement('script');
+    script.src= 'test-end.js';
+    containerDiv.appendChild(script);
 }
 
 function createEndDeliveryButton(summaryDiv) {

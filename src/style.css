@@ -38,12 +38,13 @@
 .delivery-form__input {
   border: none;
   padding: 10px;
-  margin:auto;
 }
 
 .delivery-form__div {
   display: inline-block;
   overflow: auto;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .delivery-form__label {

@@ -2,14 +2,21 @@ containerDiv = document.getElementById('container');
 isCodeNumberInvalid = true;
 isPhoneNumberInvalid = true;
 
+/**
+ * Creates loader, add class that allow loader to spin
+ */
 function loader(ms, loaderButton) {
     loaderButton.classList.add('spin');
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/**
+ * When button is clicked it appends unit test,creates a loader for 1 s then deletes 
+ * the button from the page and adds form to the page
+ */
 function startDelivery() {
-    let script= document.createElement('script');
-    script.src= 'test-start.js';
+    let script = document.createElement('script');
+    script.src = 'test-start.js';
     containerDiv.appendChild(script);
 
     let loaderButton = document.getElementById('loader');
@@ -20,10 +27,13 @@ function startDelivery() {
         loaderButton.classList.remove('spin');
         loaderButton.style.display = "none";
         document.getElementById("startDeliveryButton").remove();
-        createDeliveryForm();       
+        createDeliveryForm();
     });
 }
 
+/**
+ * Creates html form and counts time from the moment it's created
+ */
 function createDeliveryForm() {
 
     let formDelivery = this.containerDiv.appendChild(document.createElement('form'));
@@ -35,11 +45,15 @@ function createDeliveryForm() {
     createCodeNumber(formDelivery);
 
     formDelivery.appendChild(document.createElement("br"));
-    
+
     let timeStart = new Date();
     createSuccesDeliveryButton(formDelivery, timeStart);
 }
 
+/**
+ * Creates html div for phone number with input, label and error message;
+ * validates the value on change
+ */
 function createPhoneNumber(formDelivery) {
     let phoneNumberDiv = formDelivery.appendChild(document.createElement('div'));
     phoneNumberDiv.className = 'delivery-form__div';
@@ -52,7 +66,7 @@ function createPhoneNumber(formDelivery) {
     let phoneNumberInput = phoneNumberDiv.appendChild(document.createElement('input'));
     phoneNumberInput.type = 'text';
     phoneNumberInput.name = 'phoneNumber';
-    phoneNumberInput.id='phoneNumber'
+    phoneNumberInput.id = 'phoneNumber'
     phoneNumberInput.className = 'delivery-form__input'
 
     let phoneNumberError = phoneNumberDiv.appendChild(document.createElement('span'));
@@ -63,6 +77,10 @@ function createPhoneNumber(formDelivery) {
     phoneNumberInput.onchange = function () { validatePhoneNumber() };
 }
 
+/**
+ * Creates html div for code number with input, label and error message ;
+ * validates the value on change
+ */
 function createCodeNumber(formDelivery) {
     let codeNumberDiv = formDelivery.appendChild(document.createElement('div'));
 
@@ -86,6 +104,10 @@ function createCodeNumber(formDelivery) {
     codeNumberInput.onchange = function () { validateCodeNumber() };
 }
 
+/**
+ * Creates html button which is enabled to click if form validtions is true,
+ * on click stop time count which started when form was created 
+ */
 function createSuccesDeliveryButton(formDelivery, timeStart) {
     let succesDeliveryButton = formDelivery.appendChild(document.createElement('button'));
     succesDeliveryButton.innerHTML = "Odbierz paczkę";
@@ -100,6 +122,10 @@ function createSuccesDeliveryButton(formDelivery, timeStart) {
     };
 }
 
+/**
+ * When button is clicked creates html div for summary message, show how much time 
+ * the form taken, appends the unit test file
+ */
 function succesDelivery(deliveryTime) {
     let deliverySummary = this.containerDiv.appendChild(document.createElement('div'));
     deliverySummary.className = 'modal';
@@ -117,11 +143,14 @@ function succesDelivery(deliveryTime) {
     createEndDeliveryButton(summaryDiv);
     createNextDeliveryButton(summaryDiv);
 
-    let script= document.createElement('script');
-    script.src= 'test-end.js';
+    let script = document.createElement('script');
+    script.src = 'test-end.js';
     containerDiv.appendChild(script);
 }
 
+/**
+ * Creates button which takes you to starting page
+ */
 function createEndDeliveryButton(summaryDiv) {
     let endDeliveryButton = summaryDiv.appendChild(document.createElement('button'));
     endDeliveryButton.innerHTML = "To wszystko na dziś";
@@ -132,6 +161,9 @@ function createEndDeliveryButton(summaryDiv) {
     };
 }
 
+/**
+ * Creates button which takes you to form page
+ */
 function createNextDeliveryButton(summaryDiv) {
     let nextDeliveryButton = summaryDiv.appendChild(document.createElement('button'));
     nextDeliveryButton.innerHTML = "Odbierz kolejną paczkę";
@@ -142,6 +174,10 @@ function createNextDeliveryButton(summaryDiv) {
     };
 }
 
+/**
+ * When button is clicked it removes form and summary from the page,
+ * sets validation flags to true then creates a new form
+ */
 function nextDelivery() {
     document.getElementById("deliveryForm").remove();
     document.getElementById("summary").remove();
@@ -149,6 +185,10 @@ function nextDelivery() {
     createDeliveryForm();
 };
 
+/**
+ * When button is clicked it removes form and summary from the page,
+ * sets validation flags to true, then creates a new starting button
+ */
 function endDelivery() {
     document.getElementById("deliveryForm").remove();
     document.getElementById("summary").remove();
@@ -165,6 +205,9 @@ function endDelivery() {
     };
 }
 
+/**
+ * Checks if package's phone number is valid
+ */
 function validatePhoneNumber() {
     let phoneNumber = document.forms["deliveryForm"]["phoneNumber"].value;
     if (
@@ -183,6 +226,9 @@ function validatePhoneNumber() {
     validateForm();
 }
 
+/**
+ * Checks if package's code number is valid
+ */
 function validateCodeNumber() {
     let codeNumber = document.forms["deliveryForm"]["codeNumber"].value;
     if (
@@ -201,6 +247,9 @@ function validateCodeNumber() {
     validateForm();
 }
 
+/**
+ * Checks if entire form is valid
+ */
 function validateForm() {
     if (this.isCodeNumberInvalid || this.isPhoneNumberInvalid) {
         document.getElementById("succesDeliveryButton").disabled = true;
@@ -211,6 +260,9 @@ function validateForm() {
     }
 }
 
+/**
+ * Sets flags
+ */
 function setFormValidity(isInvalid) {
     this.isPhoneNumberInvalid = isInvalid;
     this.isCodeNumberInvalid = isInvalid;

@@ -26,20 +26,16 @@
     it('check if there is h1 tag', function () {
         let selector = document.querySelector('#container');
         assert(selector.innerHTML.includes('h1'));
-
-
     });
     
     it('check if there is delivery form on the page', function () {
         let selector = document.querySelector('#container');
         assert(selector.innerHTML.includes('<form'));
-
     });
 
     it('check if summary is shown', function () {
         let selector = document.querySelector('#container');
         assert(selector.innerHTML.includes('summary'));
-
     });
 
     it('check if code number is valid', function () {
